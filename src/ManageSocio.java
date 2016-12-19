@@ -62,12 +62,13 @@ public class ManageSocio {
         return socioID;
     }
     /* Method to  READ all the employees */
-    public void listSocios( ){
+    public List listSocios( ){
         Session session = factory.openSession();
         Transaction tx = null;
+        List socios=null;
         try{
             tx = session.beginTransaction();
-            List socios = session.createQuery("FROM Socio").list();
+            socios = session.createQuery("FROM Socio").list();
             for (Iterator iterator =
                  socios.iterator(); iterator.hasNext();){
                 Socio socio = (Socio) iterator.next();
@@ -84,6 +85,7 @@ public class ManageSocio {
         }finally {
             session.close();
         }
+        return socios;
     }
     /* Method to UPDATE salary for an employee */
     public void updateSocio(Integer SocioID,String nombre, int edad, String direccion, int telefono){

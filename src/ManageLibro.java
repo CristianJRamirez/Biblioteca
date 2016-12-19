@@ -34,13 +34,13 @@ public class ManageLibro {
         ML.listLibros();
 */
       /* Update employee's records */
-        //  ME.updateLibro(empID1, 5000);
+        //  ML.updateLibro(empID1, 5000);
 
       /* Delete an employee from the database */
-        //   ME.deleteLibro(empID2);
+        //   ML.deleteLibro(empID2);
 
       /* List down new list of the employees */
-        // ME.listLibros();
+        // ML.listLibros();
    // }
     /* Method to CREATE an employee in the database */
     public Integer addLibro(String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion) {
@@ -60,13 +60,15 @@ public class ManageLibro {
         }
         return libroID;
     }
+
     /* Method to  READ all the employees */
-    public void listLibros( ){
+    public List listLibros( ){
         Session session = factory.openSession();
         Transaction tx = null;
+        List libros=null;
         try{
             tx = session.beginTransaction();
-            List libros = session.createQuery("FROM Libro").list();
+            libros = session.createQuery("FROM Libro").list();
             for (Iterator iterator =
                  libros.iterator(); iterator.hasNext();){
                 Libro libro = (Libro) iterator.next();
@@ -84,6 +86,7 @@ public class ManageLibro {
         }finally {
             session.close();
         }
+        return libros;
     }
     /* Method to UPDATE salary for an employee */
     public void updateLibro(Integer LibroID, String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion) {
@@ -124,4 +127,5 @@ public class ManageLibro {
             session.close();
         }
     }
+
 }

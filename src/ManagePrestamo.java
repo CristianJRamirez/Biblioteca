@@ -60,12 +60,13 @@ public class ManagePrestamo {
         return prestamoID;
     }
     /* Method to  READ all the employees */
-    public void listPrestamos( ){
+    public List listPrestamos( ){
         Session session = factory.openSession();
         Transaction tx = null;
+        List prestamos= null;
         try{
             tx = session.beginTransaction();
-            List prestamos = session.createQuery("FROM Prestamo").list();
+            prestamos = session.createQuery("FROM Prestamo").list();
             for (Iterator iterator =
                  prestamos.iterator(); iterator.hasNext();){
                 Prestamo employee = (Prestamo) iterator.next();
@@ -82,6 +83,7 @@ public class ManagePrestamo {
         }finally {
             session.close();
         }
+        return prestamos;
     }
     /* Method to UPDATE salary for an employee */
     public void updatePrestamo(Integer PrestamoID,int idLibro, int idSocio, Date fechaInicio, Date fechaFinal){
