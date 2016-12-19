@@ -15,7 +15,7 @@ public class ManagePrestamo {
 
     private static SessionFactory factory;
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         try{
             factory = new Configuration().configure().buildSessionFactory();
         }catch (Throwable ex) {
@@ -24,14 +24,14 @@ public class ManagePrestamo {
         }
         ManagePrestamo MP = new ManagePrestamo();
 
-      /* Add few employee records in database */
-        Integer empID1 = MP.addPrestamos("Zara", "Ali", 1000);
-        Integer empID2 = MP.addPrestamos("Daisy", "Das", 5000);
-        Integer empID3 = MP.addPrestamos("John", "Paul", 10000);
+      // Add few employee records in database
+        Integer presID1 = MP.addPrestamos("Zara", "Ali", 1000);
+        Integer presID2 = MP.addPrestamos("Daisy", "Das", 5000);
+        Integer presID3 = MP.addPrestamos("John", "Paul", 10000);
 
-      /* List down all the employees */
+      // List down all the employees
         MP.listPrestamos();
-
+*/
       /* Update employee's records */
         //  MP.updatePrestamos(empID1, 5000);
 
@@ -40,16 +40,16 @@ public class ManagePrestamo {
 
       /* List down new list of the employees */
         // MP.listPrestamos();
-    }
+   // }
     /* Method to CREATE an employee in the database */
-    public Integer addPrestamos(String fname, String lname, int salary){
+    public Integer addPrestamos(int idLibro, int idSocio, Date fechaInicio, Date fechaFinal){
         Session session = factory.openSession();
         Transaction tx = null;
-        Integer employeeID = null;
+        Integer prestamoID = null;
         try{
             tx = session.beginTransaction();
-            Prestamo prestamo = new Prestamo(fname, lname, salary);
-            employeeID = (Integer) session.save(prestamo);
+            Prestamo prestamo = new Prestamo(idLibro, idSocio, fechaInicio, fechaFinal);
+            prestamoID = (Integer) session.save(prestamo);
             tx.commit();
         }catch (HibernateException e) {
             if (tx!=null) tx.rollback();
@@ -57,7 +57,7 @@ public class ManagePrestamo {
         }finally {
             session.close();
         }
-        return employeeID;
+        return prestamoID;
     }
     /* Method to  READ all the employees */
     public void listPrestamos( ){
@@ -65,13 +65,15 @@ public class ManagePrestamo {
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            List employees = session.createQuery("FROM Prestamo").list();
+            List prestamos = session.createQuery("FROM Prestamo").list();
             for (Iterator iterator =
-                 employees.iterator(); iterator.hasNext();){
+                 prestamos.iterator(); iterator.hasNext();){
                 Prestamo employee = (Prestamo) iterator.next();
-                System.out.print("First Name: " + employee.getFirstName());
-                System.out.print("  Last Name: " + employee.getLastName());
-                System.out.println("  Salary: " + employee.getSalary());
+                System.out.print("ID : " + employee.getId());
+                System.out.print("\tID Libro: " + employee.getIdLibro());
+                System.out.print("\tID Socio: " + employee.getIdSocio());
+                System.out.println("\tFecha Inicio: " + employee.getFechaInicio());
+                System.out.println("\tFecha Final: " + employee.getFechaFinal());
             }
             tx.commit();
         }catch (HibernateException e) {
@@ -82,15 +84,18 @@ public class ManagePrestamo {
         }
     }
     /* Method to UPDATE salary for an employee */
-    public void updatePrestamos(Integer EmployeeID, int salary ){
+    public void updatePrestamo(Integer PrestamoID,int idLibro, int idSocio, Date fechaInicio, Date fechaFinal){
         Session session = factory.openSession();
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            Prestamo employee =
-                    (Prestamo)session.get(Prestamo.class, EmployeeID);
-            employee.setSalary( salary );
-            session.update(employee);
+            Prestamo prestamo =
+                    (Prestamo)session.get(Prestamo.class, PrestamoID);
+            prestamo.setIdLibro( idLibro );
+            prestamo.setIdSocio( idSocio );
+            prestamo.setFechaInicio( fechaInicio );
+            prestamo.setFechaFinal( fechaFinal );
+            session.update(prestamo);
             tx.commit();
         }catch (HibernateException e) {
             if (tx!=null) tx.rollback();
@@ -100,14 +105,14 @@ public class ManagePrestamo {
         }
     }
     /* Method to DELETE an employee from the records */
-    public void deletePrestamos(Integer EmployeeID){
+    public void deletePrestamo(Integer PrestamoID){
         Session session = factory.openSession();
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            Prestamo employee =
-                    (Prestamo)session.get(Prestamo.class, EmployeeID);
-            session.delete(employee);
+            Prestamo prestamo =
+                    (Prestamo)session.get(Prestamo.class, PrestamoID);
+            session.delete(prestamo);
             tx.commit();
         }catch (HibernateException e) {
             if (tx!=null) tx.rollback();

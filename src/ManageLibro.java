@@ -16,7 +16,7 @@ public class ManageLibro {
 
     private static SessionFactory factory;
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         try{
             factory = new Configuration().configure().buildSessionFactory();
         }catch (Throwable ex) {
@@ -25,32 +25,32 @@ public class ManageLibro {
         }
         ManageLibro ML = new ManageLibro();
 
-      /* Add few employee records in database */
-        Integer empID1 = ML.addEmployee("Zara", "Ali", 1000);
-        Integer empID2 = ML.addEmployee("Daisy", "Das", 5000);
-        Integer empID3 = ML.addEmployee("John", "Paul", 10000);
+      // Add few employee records in database
+        Integer libID1 = ML.addLibro("Zara", "Ali", 1000);
+        Integer libID2 = ML.addLibro("Daisy", "Das", 5000);
+        Integer libID3 = ML.addLibro("John", "Paul", 10000);
 
-      /* List down all the employees */
-        ML.listEmployees();
-
+      // List down all the employees
+        ML.listLibros();
+*/
       /* Update employee's records */
-        //  ME.updateEmployee(empID1, 5000);
+        //  ME.updateLibro(empID1, 5000);
 
       /* Delete an employee from the database */
-        //   ME.deleteEmployee(empID2);
+        //   ME.deleteLibro(empID2);
 
       /* List down new list of the employees */
-        // ME.listEmployees();
-    }
+        // ME.listLibros();
+   // }
     /* Method to CREATE an employee in the database */
-    public Integer addEmployee(String fname, String lname, int salary){
+    public Integer addLibro(String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion) {
         Session session = factory.openSession();
         Transaction tx = null;
-        Integer employeeID = null;
+        Integer libroID = null;
         try{
             tx = session.beginTransaction();
-            Libro employee = new Libro(fname, lname, salary);
-            employeeID = (Integer) session.save(employee);
+            Libro libro = new Libro(titulo, numEjemplares, editorial, numPaginas, anyoEdicion);
+            libroID = (Integer) session.save(libro);
             tx.commit();
         }catch (HibernateException e) {
             if (tx!=null) tx.rollback();
@@ -58,21 +58,24 @@ public class ManageLibro {
         }finally {
             session.close();
         }
-        return employeeID;
+        return libroID;
     }
     /* Method to  READ all the employees */
-    public void listEmployees( ){
+    public void listLibros( ){
         Session session = factory.openSession();
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            List employees = session.createQuery("FROM Libro").list();
+            List libros = session.createQuery("FROM Libro").list();
             for (Iterator iterator =
-                 employees.iterator(); iterator.hasNext();){
+                 libros.iterator(); iterator.hasNext();){
                 Libro libro = (Libro) iterator.next();
-                System.out.print("First Name: " + libro.getFirstName());
-                System.out.print("  Last Name: " + libro.getLastName());
-                System.out.println("  Salary: " + libro.getSalary());
+                System.out.print("ID: " + libro.getId());
+                System.out.print("\tTitulo: " + libro.getTitulo());
+                System.out.print("\tNº Ejemplares: " + libro.getNumEjemplares());
+                System.out.print("\tEditorial: " + libro.getEditorial());
+                System.out.print("\tNº Paginas: " + libro.getNumPaginas());
+                System.out.println("\tAño Edicion: " + libro.getAnyoEdicion());
             }
             tx.commit();
         }catch (HibernateException e) {
@@ -83,14 +86,18 @@ public class ManageLibro {
         }
     }
     /* Method to UPDATE salary for an employee */
-    public void updateEmployee(Integer LibroID, int salary ){
+    public void updateLibro(Integer LibroID, String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion) {
         Session session = factory.openSession();
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
             Libro libro =
                     (Libro)session.get(Libro.class, LibroID);
-            libro.setSalary( salary );
+            libro.setTitulo( titulo );
+            libro.setNumEjemplares( numEjemplares );
+            libro.setEditorial( editorial );
+            libro.setNumPaginas( numPaginas );
+            libro.setAnyoEdicion( anyoEdicion );
             session.update(libro);
             tx.commit();
         }catch (HibernateException e) {
@@ -101,7 +108,7 @@ public class ManageLibro {
         }
     }
     /* Method to DELETE an employee from the records */
-    public void deleteEmployee(Integer LibroID){
+    public void deleteLibro(Integer LibroID){
         Session session = factory.openSession();
         Transaction tx = null;
         try{

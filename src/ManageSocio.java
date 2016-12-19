@@ -17,7 +17,7 @@ public class ManageSocio {
 
     private static SessionFactory factory;
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         try{
             factory = new Configuration().configure().buildSessionFactory();
         }catch (Throwable ex) {
@@ -26,32 +26,32 @@ public class ManageSocio {
         }
         ManageSocio MS = new ManageSocio();
 
-      /* Add few employee records in database */
-        Integer empID1 = MS.addEmployee("Zara", "Ali", 1000);
-        Integer empID2 = MS.addEmployee("Daisy", "Das", 5000);
-        Integer empID3 = MS.addEmployee("John", "Paul", 10000);
+      // Add few employee records in database
+        Integer socID1 = MS.addSocios("Zara", "Ali", 1000);
+        Integer socID2 = MS.addSocios("Daisy", "Das", 5000);
+        Integer socID3 = MS.addSocios("John", "Paul", 10000);
 
-      /* List down all the employees */
-        MS.listEmployees();
-
+      // List down all the employees
+        MS.listSocios();
+*/
       /* Update employee's records */
-        //  MS.updateEmployee(empID1, 5000);
+        //  MS.updateSocios(empID1, 5000);
 
       /* Delete an employee from the database */
-        //   MS.deleteEmployee(empID2);
+        //   MS.deleteSocios(empID2);
 
       /* List down new list of the employees */
-        // MS.listEmployees();
-    }
+        // MS.listSocios();
+    //}
     /* Method to CREATE an employee in the database */
-    public Integer addEmployee(String fname, String lname, int salary){
+    public Integer addSocios(String nombre, int edad, String direccion, int telefono){
         Session session = factory.openSession();
         Transaction tx = null;
-        Integer employeeID = null;
+        Integer socioID = null;
         try{
             tx = session.beginTransaction();
-            Socio socio = new Socio(fname, lname, salary);
-            employeeID = (Integer) session.save(socio);
+            Socio socio = new Socio(nombre, edad, direccion, telefono);
+            socioID = (Integer) session.save(socio);
             tx.commit();
         }catch (HibernateException e) {
             if (tx!=null) tx.rollback();
@@ -59,21 +59,23 @@ public class ManageSocio {
         }finally {
             session.close();
         }
-        return employeeID;
+        return socioID;
     }
     /* Method to  READ all the employees */
-    public void listEmployees( ){
+    public void listSocios( ){
         Session session = factory.openSession();
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            List employees = session.createQuery("FROM Socio").list();
+            List socios = session.createQuery("FROM Socio").list();
             for (Iterator iterator =
-                 employees.iterator(); iterator.hasNext();){
+                 socios.iterator(); iterator.hasNext();){
                 Socio socio = (Socio) iterator.next();
-                System.out.print("First Name: " + socio.getFirstName());
-                System.out.print("  Last Name: " + socio.getLastName());
-                System.out.println("  Salary: " + socio.getSalary());
+                System.out.print("ID: " + socio.getId());
+                System.out.print("\tNombre : " + socio.getNombre());
+                System.out.print("\tEdad : " + socio.getEdad());
+                System.out.print("\tDireccion : " + socio.getDireccion());
+                System.out.println("\tTelefono : " + socio.getTelefono());
             }
             tx.commit();
         }catch (HibernateException e) {
@@ -84,14 +86,17 @@ public class ManageSocio {
         }
     }
     /* Method to UPDATE salary for an employee */
-    public void updateEmployee(Integer SocioID, int salary ){
+    public void updateSocio(Integer SocioID,String nombre, int edad, String direccion, int telefono){
         Session session = factory.openSession();
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
             Socio socio =
                     (Socio)session.get(Socio.class, SocioID);
-            socio.setSalary( salary );
+            socio.setNombre( nombre );
+            socio.setEdad( edad );
+            socio.setDireccion( direccion );
+            socio.setTelefono( telefono );
             session.update(socio);
             tx.commit();
         }catch (HibernateException e) {
@@ -102,7 +107,7 @@ public class ManageSocio {
         }
     }
     /* Method to DELETE an employee from the records */
-    public void deleteEmployee(Integer SocioID){
+    public void deleteSocio(Integer SocioID){
         Session session = factory.openSession();
         Transaction tx = null;
         try{
