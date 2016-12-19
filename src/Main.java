@@ -1,10 +1,9 @@
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by 45858000w on 19/12/16.
@@ -412,7 +411,33 @@ public class Main {
 //endregion
 
     private static void doPrestamo() {
-        //TODO : ACABAR
+
+        //(int idLibro, int idSocio, Date fechaInicio, Date fechaFinal)
+        System.out.println("Dime el idLibro del Libro");
+        Scanner sc = new Scanner(System.in);
+        int idLibro = sc.nextInt();
+
+        System.out.println("Dime el idSocio del Socio");
+        sc = new Scanner(System.in);
+        int idSocio = sc.nextInt();
+
+        System.out.println("Dime la fecha Inicio del prestamo");
+        sc = new Scanner(System.in);
+        String fechaIni = sc.nextLine();
+
+        System.out.println("Dime la fecha Inicio del prestamo");
+        sc = new Scanner(System.in);
+        String fechaFin = sc.nextLine();
+
+        ManagePrestamo MP = new ManagePrestamo();
+
+        Date fechaInicio= getFecha(fechaIni);
+        Date fechaFinal= getFecha(fechaFin);
+
+        Integer libID1 = MP.addPrestamos(idLibro, idSocio, fechaInicio, fechaFinal);
+        //libros.add(libID1,ML);
+        System.out.println("Añadido el Prestamo");
+
 
     }
 
@@ -451,8 +476,7 @@ public class Main {
         } while (!exit);
     }
 
-    private static void listaTodosLibros()
-    {
+    private static void listaTodosLibros()    {
         ManagePrestamo MP = new ManagePrestamo();
         List prestamos = MP.listPrestamos();
         for (Iterator iterator =
@@ -468,8 +492,7 @@ public class Main {
         }
     }
 
-    private static void listaLibrosSocio()
-    {
+    private static void listaLibrosSocio()    {
         System.out.println("Dime el Id del Socio");
         Scanner sc = new Scanner(System.in);
         int id = sc.nextInt();
@@ -492,19 +515,19 @@ public class Main {
         }
     }
 
-    private static void listaLibrosFecha()
-    {
-        System.out.println("Dime el Id del Socio");
+    private static void listaLibrosFecha()    {
+        System.out.println("Dime la fecha Inicio del prestamo");
         Scanner sc = new Scanner(System.in);
-        String fecha = sc.nextLine();
+        String fechaFin = sc.nextLine();
 
+        Date fecha=getFecha(fechaFin);
         ManagePrestamo MP = new ManagePrestamo();
         List prestamos = MP.listPrestamos();
         for (Iterator iterator =
              prestamos.iterator(); iterator.hasNext(); ) {
             Prestamo prestamo = (Prestamo) iterator.next();
-//TODO acabar la conversion de fecha para poder comparar
-            if (prestamo.getFechaFinal()==fecha)
+
+            if (prestamo.getFechaFinal().before(fecha))
             {
                 System.out.print("ID : " + prestamo.getId());
                 System.out.print("\tID Libro: " + prestamo.getIdLibro());
@@ -516,25 +539,46 @@ public class Main {
         }
     }
 
-    private static void listaSocios()
-    {
-        //TODO : acabar de hacer el listado de socios que tenen llibres que han superat a data de fi de préstec
-        ManageSocio MS = new ManageSocio();
-        List socios = MS.listSocios();
-        for (Iterator iterator =
-             socios.iterator(); iterator.hasNext();){
-            Socio socio = (Socio) iterator.next();
+    private static void listaSocios()    {
+        System.out.println("Dime la fecha final del prestamo");
+        Scanner sc = new Scanner(System.in);
+        String fechaString = sc.nextLine();
 
-            if (socio.getNombre().equalsIgnoreCase(nombre)) {
-                System.out.print("ID: " + socio.getId());
-                System.out.print("\tNombre : " + socio.getNombre());
-                System.out.print("\tEdad : " + socio.getEdad());
-                System.out.print("\tDireccion : " + socio.getDireccion());
-                System.out.println("\tTelefono : " + socio.getTelefono());
+        Date fecha=getFecha(fechaString);
+        ManagePrestamo MP = new ManagePrestamo();
+        List prestamos = MP.listPrestamos();
+        for (Iterator iterator =
+             prestamos.iterator(); iterator.hasNext(); ) {
+            Prestamo prestamo = (Prestamo) iterator.next();
+
+            if (prestamo.getFechaFinal().before(fecha))
+            {
+                System.out.print("ID : " + prestamo.getId());
+                System.out.print("\tID Libro: " + prestamo.getIdLibro());
+                System.out.print("\tID Socio: " + prestamo.getIdSocio());
+                System.out.println("\tFecha Inicio: " + prestamo.getFechaInicio());
+                System.out.println("\tFecha Final: " + prestamo.getFechaFinal());
             }
         }
     }
 
+    private static Date getFecha(String fechaString)    {
+
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+        Date fecha = null;
+        try {
+
+            fecha = formatoDelTexto.parse(fechaString);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
+        //System.out.println(formatoDeFecha.format(fecha));
+
+        return fecha;
+    }
 
 
 }
