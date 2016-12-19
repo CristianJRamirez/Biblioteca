@@ -6,12 +6,12 @@ import java.util.Date;
 public class Prestamo {
 
 
+
     private int id;
     private int idLibro;
     private int idSocio;
     private Date fechaInicio;
     private Date fechaFinal;
-
     public Prestamo() {
     }
 
