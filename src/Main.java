@@ -21,7 +21,7 @@ public class Main {
 //http://serprogramador.es/como-conectar-y-utilizar-java-con-sqlite/
 
         boolean exit = false;
-
+//TODO: crear la BBDD en el ubuntu server de maquina virtual y probarlo todo
 
         do {
             System.out.println("\n<---------------------------MENU----------------------------->");
