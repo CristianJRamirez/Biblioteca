@@ -26,7 +26,7 @@ public class Main {
         do {
             System.out.println("\n<---------------------------MENU----------------------------->");
             System.out.println("Que quieres hacer \n" +
-                    "\t\tCrear tablas                                                                   -> Pulse el '1' \n" +
+                    "\t\tCrear tablas       -> NO IMPLEMENTADO                                                            -> Pulse el '1' \n" +
                     "\t\tDonar d'alta, de baixa i modificar llibres.                                    -> Pulse el '2' \n" +
                     "\t\tDonar d'alta, de baixa i modificar socis.                                      -> Pulse el '3' \n" +
                     "\t\tConsultar socis i llibres per diferents criteris: nom, cognom, títol, autor.   -> Pulse el '4' \n" +
@@ -100,7 +100,7 @@ public class Main {
                     "\t\tAñadir                         -> Pulse el '1' \n" +
                     "\t\tActualizar                     -> Pulse el '2' \n" +
                     "\t\tEliminar                       -> Pulse el '3' \n" +
-                    "\t\tSalir de la Aplicacion         -> Pulse el '0' " +
+                    "\t\tSalir del Apartado Libro       -> Pulse el '0' " +
                     "");
             Scanner sc = new Scanner(System.in);
             int opcion = sc.nextInt();
@@ -185,7 +185,7 @@ public class Main {
     }
 //endregion
 
-    //region Libro : -> añadir, actualizar y borrar
+    //region Socio : -> añadir, actualizar y borrar
     private static void updateSocio() {
         boolean exit = false;
 
@@ -195,7 +195,7 @@ public class Main {
                     "\t\tAñadir                         -> Pulse el '1' \n" +
                     "\t\tActualizar                     -> Pulse el '2' \n" +
                     "\t\tEliminar                       -> Pulse el '3' \n" +
-                    "\t\tSalir de la Aplicacion         -> Pulse el '0' " +
+                    "\t\tSalir del Apartado Socio       -> Pulse el '0' " +
                     "");
             Scanner sc = new Scanner(System.in);
             int opcion = sc.nextInt();
@@ -287,11 +287,11 @@ public class Main {
                     "\t\tpor Edat                     -> Pulse el '2' \n" +
                     "\t\tpor Titulo                       -> Pulse el '3' \n" +
                     "\t\tpor Autor                       -> Pulse el '4' \n" +
-                    "\t\tSalir de la Aplicacion         -> Pulse el '0' " +
+                    "\t\tSalir de la Parte de Consulta   -> Pulse el '0' " +
                     "");
             Scanner sc = new Scanner(System.in);
             int opcion = sc.nextInt();
-            if (opcion > 5) {
+            if (opcion < 5) {
                 switch (opcion) {
                     case 0://salir
                         exit = true;
@@ -318,6 +318,7 @@ public class Main {
     }
 
     //region busqueda de libro/socio -> nombre, edat, titulo, anyo
+
     private static void socioNombre() {
         System.out.println("Dime el Nombre del Socio");
         Scanner sc = new Scanner(System.in);
@@ -361,7 +362,6 @@ public class Main {
             }
         }
     }
-
 
     private static void libroTitulo() {
         System.out.println("Dime el Titulo del Libro");
@@ -408,6 +408,7 @@ public class Main {
             }
         }
     }
+
 //endregion
 
     private static void doPrestamo() {
@@ -425,7 +426,7 @@ public class Main {
         sc = new Scanner(System.in);
         String fechaIni = sc.nextLine();
 
-        System.out.println("Dime la fecha Inicio del prestamo");
+        System.out.println("Dime la fecha Final del prestamo");
         sc = new Scanner(System.in);
         String fechaFin = sc.nextLine();
 
@@ -441,6 +442,8 @@ public class Main {
 
     }
 
+    //region Listar Libros
+
     private static void listaLibros() {
         boolean exit = false;
         do {
@@ -449,11 +452,11 @@ public class Main {
                     "\t\tpor Todos                                      -> Pulse el '1' \n" +
                     "\t\tpor un Socio Determinado                       -> Pulse el '2' \n" +
                     "\t\tque han superat la data de fi de préstec       -> Pulse el '3' \n" +
-                    "\t\tSalir de la Aplicacion                         -> Pulse el '0' " +
+                    "\t\tSalir de la parte de consulta de Prestamos     -> Pulse el '0' " +
                     "");
             Scanner sc = new Scanner(System.in);
             int opcion = sc.nextInt();
-            if (opcion > 5) {
+            if (opcion < 5) {
                 switch (opcion) {
                     case 0://salir
                         exit = true;
@@ -561,6 +564,8 @@ public class Main {
             }
         }
     }
+
+//endregion
 
     private static Date getFecha(String fechaString)    {
 

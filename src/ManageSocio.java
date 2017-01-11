@@ -45,6 +45,7 @@ public class ManageSocio {
     //}
     /* Method to CREATE an employee in the database */
     public Integer addSocios(String nombre, int edad, String direccion, int telefono){
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         Integer socioID = null;
@@ -63,6 +64,7 @@ public class ManageSocio {
     }
     /* Method to  READ all the employees */
     public List listSocios( ){
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         List socios=null;
@@ -72,11 +74,11 @@ public class ManageSocio {
             for (Iterator iterator =
                  socios.iterator(); iterator.hasNext();){
                 Socio socio = (Socio) iterator.next();
-                System.out.print("ID: " + socio.getId());
+                /*System.out.print("ID: " + socio.getId());
                 System.out.print("\tNombre : " + socio.getNombre());
                 System.out.print("\tEdad : " + socio.getEdad());
                 System.out.print("\tDireccion : " + socio.getDireccion());
-                System.out.println("\tTelefono : " + socio.getTelefono());
+                System.out.println("\tTelefono : " + socio.getTelefono());*/
             }
             tx.commit();
         }catch (HibernateException e) {
@@ -89,6 +91,7 @@ public class ManageSocio {
     }
     /* Method to UPDATE salary for an employee */
     public void updateSocio(Integer SocioID,String nombre, int edad, String direccion, int telefono){
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try{
@@ -110,6 +113,7 @@ public class ManageSocio {
     }
     /* Method to DELETE an employee from the records */
     public void deleteSocio(Integer SocioID){
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try{

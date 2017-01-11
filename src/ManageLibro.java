@@ -44,6 +44,7 @@ public class ManageLibro {
    // }
     /* Method to CREATE an employee in the database */
     public Integer addLibro(String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion) {
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         Integer libroID = null;
@@ -63,6 +64,7 @@ public class ManageLibro {
 
     /* Method to  READ all the employees */
     public List listLibros( ){
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         List libros=null;
@@ -72,12 +74,12 @@ public class ManageLibro {
             for (Iterator iterator =
                  libros.iterator(); iterator.hasNext();){
                 Libro libro = (Libro) iterator.next();
-                System.out.print("ID: " + libro.getId());
+                /*System.out.print("ID: " + libro.getId());
                 System.out.print("\tTitulo: " + libro.getTitulo());
                 System.out.print("\tNº Ejemplares: " + libro.getNumEjemplares());
                 System.out.print("\tEditorial: " + libro.getEditorial());
                 System.out.print("\tNº Paginas: " + libro.getNumPaginas());
-                System.out.println("\tAño Edicion: " + libro.getAnyoEdicion());
+                System.out.println("\tAño Edicion: " + libro.getAnyoEdicion());*/
             }
             tx.commit();
         }catch (HibernateException e) {
@@ -90,6 +92,7 @@ public class ManageLibro {
     }
     /* Method to UPDATE salary for an employee */
     public void updateLibro(Integer LibroID, String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion) {
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try{
@@ -112,6 +115,7 @@ public class ManageLibro {
     }
     /* Method to DELETE an employee from the records */
     public void deleteLibro(Integer LibroID){
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try{

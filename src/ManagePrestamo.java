@@ -43,6 +43,7 @@ public class ManagePrestamo {
    // }
     /* Method to CREATE an employee in the database */
     public Integer addPrestamos(int idLibro, int idSocio, Date fechaInicio, Date fechaFinal){
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         Integer prestamoID = null;
@@ -61,6 +62,7 @@ public class ManagePrestamo {
     }
     /* Method to  READ all the employees */
     public List listPrestamos( ){
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         List prestamos= null;
@@ -70,11 +72,11 @@ public class ManagePrestamo {
             for (Iterator iterator =
                  prestamos.iterator(); iterator.hasNext();){
                 Prestamo employee = (Prestamo) iterator.next();
-                System.out.print("ID : " + employee.getId());
+                /*System.out.print("ID : " + employee.getId());
                 System.out.print("\tID Libro: " + employee.getIdLibro());
                 System.out.print("\tID Socio: " + employee.getIdSocio());
                 System.out.println("\tFecha Inicio: " + employee.getFechaInicio());
-                System.out.println("\tFecha Final: " + employee.getFechaFinal());
+                System.out.println("\tFecha Final: " + employee.getFechaFinal());*/
             }
             tx.commit();
         }catch (HibernateException e) {
@@ -87,6 +89,7 @@ public class ManagePrestamo {
     }
     /* Method to UPDATE salary for an employee */
     public void updatePrestamo(Integer PrestamoID,int idLibro, int idSocio, Date fechaInicio, Date fechaFinal){
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try{
@@ -108,6 +111,7 @@ public class ManagePrestamo {
     }
     /* Method to DELETE an employee from the records */
     public void deletePrestamo(Integer PrestamoID){
+        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = null;
         try{

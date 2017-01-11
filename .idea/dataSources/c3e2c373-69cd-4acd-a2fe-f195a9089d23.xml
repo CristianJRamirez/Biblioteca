@@ -17,7 +17,8 @@
     <schema id="5" parent="1" name="public">
       <object-id>2200</object-id>
       <visible>1</visible>
-      <introspection-timestamp>2016-12-12.17:48:00.510</introspection-timestamp>
+      <introspection-state-number>10482</introspection-state-number>
+      <introspection-timestamp>2017-01-11.16:43:04.035</introspection-timestamp>
     </schema>
     <schema id="6" parent="1" name="pg_catalog">
       <object-id>11</object-id>
@@ -34,5 +35,81 @@
     <schema id="10" parent="1" name="information_schema">
       <object-id>12163</object-id>
     </schema>
+    <table id="11" parent="5" name="libro">
+      <object-id>24578</object-id>
+      <state-number>10479</state-number>
+    </table>
+    <table id="12" parent="5" name="prestamo">
+      <object-id>24584</object-id>
+      <state-number>10480</state-number>
+    </table>
+    <table id="13" parent="5" name="socio">
+      <object-id>24581</object-id>
+      <state-number>10482</state-number>
+    </table>
+    <column id="14" parent="11" name="titulo">
+      <state-number>10475</state-number>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="15" parent="11" name="numejemplares">
+      <state-number>10475</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="16" parent="11" name="editorial">
+      <state-number>10475</state-number>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="17" parent="11" name="numpaginas">
+      <state-number>10475</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="18" parent="11" name="anyoedicion">
+      <state-number>10475</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="19" parent="11" name="id">
+      <state-number>10479</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="20" parent="12" name="idlibro">
+      <state-number>10477</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="21" parent="12" name="idsocio">
+      <state-number>10477</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="22" parent="12" name="fechainicio">
+      <state-number>10477</state-number>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="23" parent="12" name="fechafinal">
+      <state-number>10477</state-number>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="24" parent="12" name="id">
+      <state-number>10480</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="25" parent="13" name="nombre">
+      <state-number>10476</state-number>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="26" parent="13" name="edad">
+      <state-number>10476</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="27" parent="13" name="direccion">
+      <state-number>10476</state-number>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="28" parent="13" name="telefono">
+      <state-number>10476</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="29" parent="13" name="id">
+      <state-number>10482</state-number>
+      <data-type>integer|0</data-type>
+    </column>
   </database-model>
 </dataSource>
