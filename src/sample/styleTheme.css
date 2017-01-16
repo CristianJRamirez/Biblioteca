@@ -1,0 +1,219 @@
+.background {
+    -fx-background-color: #8c6201;
+}
+
+
+/* ***********************************************LABEL*********************************************** */
+.label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+
+}
+.label-bright {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.label-header {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+
+/* ***********************************************TEXT*********************************************** */
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color:  #FFC300 ;
+    -fx-text-fill: white;
+    -fx-border-color: red;
+    -fx-border-width: 2;
+}
+.text-Area {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color: #FFC300;
+    -fx-text-fill: white;
+    -fx-border-color: red;
+    -fx-border-width: 2;
+}
+.text-area .content {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color:#FFC300;
+    -fx-text-fill: white;
+    -fx-border-color: red;
+    -fx-border-width: 2;
+}
+.text-area:focused .content {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color: #FFC300;
+    -fx-text-fill: white;
+    -fx-border-color: red;
+    -fx-border-width: 2;
+}
+
+
+
+
+/* ***********************************************BUTTON*********************************************** */
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: darkred;
+    -fx-border-width: 2;
+    -fx-border-radius: 40px;
+    -fx-background-color: #8c6201;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #FFC300;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-background-radius: 1640;
+}
+.button:hover {
+    -fx-background-color: #FFC300;
+    -fx-text-fill: darkred;
+    -fx-border-color: darkred;
+    -fx-border-width: 2;
+    -fx-border-radius: 40px;
+    -fx-background-radius: 40px;
+}
+.button:pressed, .button:default:hover:pressed {
+    -fx-background-color: yellow;
+    -fx-text-fill: darkred;
+    -fx-border-color: darkred;
+    -fx-border-width: 2;
+    -fx-border-radius: 40px;
+    -fx-background-radius: 40px;
+}
+.button:focused {
+    -fx-border-color: darkred;
+    -fx-border-width: 2;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 40px;
+    -fx-border-insets: 1 1 1 1, 0;
+    -fx-background-radius: 40px;
+}
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+    -fx-border-color: darkred;
+    -fx-border-width: 2;
+    -fx-border-radius: 40px;
+    -fx-background-radius: 40px;
+}
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: darkred;
+    -fx-border-width: 2;
+    -fx-background-radius: 40px;
+    -fx-border-radius: 40px;
+}
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color, 30%);
+    -fx-border-color: darkred;
+    -fx-border-width: 2;
+    -fx-background-radius: 40px;
+    -fx-border-radius: 40px;
+}
+
+
+/* ***********************************************LISTVIEW*********************************************** */
+.list-cell {
+    -fx-padding: 0.25em 0.583em 0.25em 0.583em; /* 3 7 3 7 */
+    -fx-background-color:    #f5da7d   ;
+    -fx-border-width: 2;
+}
+.list-cell:odd {
+    -fx-background-color:  #fbe487 ;
+}
+
+
+/* ***********************************************TAB-PANE*********************************************** */
+.tab-pane{
+    -fx-background-color: #8c6201;
+    -fx-tab-min-height: 1.8333em; /* 22 */
+    -fx-tab-max-height: 1.8333em; /* 22 */
+}
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {/*los dos tabs*/
+    -fx-text-fill: white;
+    -fx-background-color: #8c6201;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {/* tab seleccionado*/
+    -fx-background-color: #8c6201;
+    -fx-text-fill: white;
+}
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {/*tab con focus*/
+    -fx-border-width: 2;
+    -fx-border-color: red;
+    -fx-text-fill: white;
+}
+
+.button.BLUE{
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: YELLOW;
+    -fx-border-width: 2;
+    -fx-border-radius: 40px;
+    -fx-background-color: BLUE;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #FFC300;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-background-radius: 1640;
+}
+
+.button.BLACK{
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: YELLOW;
+    -fx-border-width: 2;
+    -fx-border-radius: 40px;
+    -fx-background-color: BLACK;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #FFC300;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-background-radius: 1640;
+}
+.button.WHITE{
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: YELLOW;
+    -fx-border-width: 2;
+    -fx-border-radius: 40px;
+    -fx-background-color: WHITE;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #FFC300;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-background-radius: 1640;
+}
+.button.RED{
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: YELLOW;
+    -fx-border-width: 2;
+    -fx-border-radius: 40px;
+    -fx-background-color: RED;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #FFC300;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-background-radius: 1640;
+}
+.button.GREEN{
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: YELLOW;
+    -fx-border-width: 2;
+    -fx-border-radius: 40px;
+    -fx-background-color: GREEN;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #FFC300;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-background-radius: 1640;
+}
+
