@@ -8,13 +8,13 @@ import java.util.*;
 /**
  * Created by 45858000w on 19/12/16.
  */
-public class M2 {
+public class Program {
 
-    /* public static ArrayList<ManageLibro> libros = new ArrayList<>();
+     public static ArrayList<ManageLibro> libros = new ArrayList<>();
      public static ArrayList<ManageSocio> socios = new ArrayList<>();
      public static ArrayList<ManagePrestamo> prestamos = new ArrayList<>();
- */
-   /* public static void main(String[] args) {
+
+    public static void Program(String[] args) {
         System.out.println("BIENVENIDO AL PROGRAMA DE CRISTIAN JAVIER");
 
 
@@ -585,5 +585,5 @@ public class M2 {
         return fecha;
     }
 
-*/
+
 }
