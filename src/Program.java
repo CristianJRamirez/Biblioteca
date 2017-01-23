@@ -44,7 +44,7 @@ public class Program {
                     case 0://salir
                         exit = true;
                         break;
-                    case 1://Llistar els socis que tenen llibres que han superat a data de fi de préstec
+                    case 1://Tablas
                         crearTablas();
                         break;
                     case 2://Donar d'alta, de baixa i modificar llibres.
@@ -82,7 +82,7 @@ public class Program {
         System.out.println("EL PROGRAMA A FINALIZADO");
     }
 
-    private static void crearTablas() {
+    public static void crearTablas() {
         try {
             SessionFactory factory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
@@ -92,7 +92,7 @@ public class Program {
     }
 
     //region Libro : -> añadir, actualizar y borrar
-    private static void updateLibro() {
+    public static void updateLibro() {
         boolean exit = false;
         do {
             System.out.println("\n<---------------------------MENU----------------------------->");
@@ -128,7 +128,7 @@ public class Program {
 
     }
 
-    private static void datosLibro(int opcion) {
+    public static void datosLibro(int opcion) {
         int id = 0;
 
         if (opcion == 2) {
@@ -157,6 +157,11 @@ public class Program {
         sc = new Scanner(System.in);
         int anyoEdicion = sc.nextInt();
 
+        añadirLIbro(opcion, id, titulo, numEjemplares, editorial, numPaginas, anyoEdicion);
+
+    }
+
+    public static void añadirLIbro(int opcion, int id, String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion) {
         ManageLibro ML = new ManageLibro();
 
         if (opcion == 1) {
@@ -168,10 +173,9 @@ public class Program {
             //libros.get(id).updateLibro(id, titulo, numEjemplares, editorial, numPaginas, anyoEdicion);
             System.out.println("Actualizado el Libro");
         }
-
     }
 
-    private static void eliminarLibro() {
+    public static void eliminarLibro() {
         System.out.println("Dime el Id del Libro");
         Scanner sc = new Scanner(System.in);
         int idLibro = sc.nextInt();
@@ -186,7 +190,7 @@ public class Program {
 //endregion
 
     //region Socio : -> añadir, actualizar y borrar
-    private static void updateSocio() {
+    public static void updateSocio() {
         boolean exit = false;
 
         do {
@@ -222,7 +226,7 @@ public class Program {
         } while (!exit);
     }
 
-    private static void datosSocio(int opcion) {
+    public static void datosSocio(int opcion) {
         int id = 0;
 
         if (opcion == 2) {
@@ -248,6 +252,11 @@ public class Program {
         int telefono = sc.nextInt();
 
 
+        añadirSocio(opcion, id, nombre, edad, direccion, telefono);
+
+    }
+
+    public static void añadirSocio(int opcion, int id, String nombre, int edad, String direccion, int telefono) {
         ManageSocio MS = new ManageSocio();
 
         if (opcion == 1) {
@@ -259,10 +268,9 @@ public class Program {
             //socios.get(id).updateSocio(id,nombre, edad, direccion, telefono) ;
             System.out.println("Actualizado el Socio");
         }
-
     }
 
-    private static void eliminarSocio() {
+    public static void eliminarSocio() {
         System.out.println("Dime el Id del Socio");
         Scanner sc = new Scanner(System.in);
         int idSocio = sc.nextInt();
@@ -277,7 +285,7 @@ public class Program {
 //endregion
 
 
-    private static void consultar() {
+    public static void consultar() {
         //nom, cognom, títol, autor.
         boolean exit = false;
         do {
@@ -319,12 +327,16 @@ public class Program {
 
     //region busqueda de libro/socio -> nombre, edat, titulo, anyo
 
-    private static void socioNombre() {
+    public static void socioNombre() {
         System.out.println("Dime el Nombre del Socio");
         Scanner sc = new Scanner(System.in);
         String nombre = sc.nextLine();
 
 
+        buscarSocioNombre(nombre);
+    }
+
+    public static void buscarSocioNombre(String nombre) {
         ManageSocio MS = new ManageSocio();
         List socios = MS.listSocios();
         for (Iterator iterator =
@@ -347,6 +359,10 @@ public class Program {
         int edat = sc.nextInt();
 
 
+        buscarSocioEdat(edat);
+    }
+
+    public static void buscarSocioEdat(int edat) {
         ManageSocio MS = new ManageSocio();
         List socios = MS.listSocios();
         for (Iterator iterator =
@@ -363,12 +379,16 @@ public class Program {
         }
     }
 
-    private static void libroTitulo() {
+    public static void libroTitulo() {
         System.out.println("Dime el Titulo del Libro");
         Scanner sc = new Scanner(System.in);
         String titulo = sc.nextLine();
 
 
+        buscarLibroTitulo(titulo);
+    }
+
+    public static void buscarLibroTitulo(String titulo) {
         ManageLibro ML = new ManageLibro();
         List libros = ML.listLibros();
         for (Iterator iterator =
@@ -386,12 +406,16 @@ public class Program {
         }
     }
 
-    private static void libroAnyo() {
+    public static void libroAnyo() {
         System.out.println("Dime el año de la edicion del Libro");
         Scanner sc = new Scanner(System.in);
         int anyo = sc.nextInt();
 
 
+        buscarLibroAnyo(anyo);
+    }
+
+    public static void buscarLibroAnyo(int anyo) {
         ManageLibro ML = new ManageLibro();
         List libros = ML.listLibros();
         for (Iterator iterator =
@@ -411,7 +435,8 @@ public class Program {
 
 //endregion
 
-    private static void doPrestamo() {
+    //region Prestamos
+    public static void doPrestamo() {
 
         //(int idLibro, int idSocio, Date fechaInicio, Date fechaFinal)
         System.out.println("Dime el idLibro del Libro");
@@ -430,21 +455,45 @@ public class Program {
         sc = new Scanner(System.in);
         String fechaFin = sc.nextLine();
 
-        ManagePrestamo MP = new ManagePrestamo();
-
         Date fechaInicio= getFecha(fechaIni);
         Date fechaFinal= getFecha(fechaFin);
 
-        Integer libID1 = MP.addPrestamos(idLibro, idSocio, fechaInicio, fechaFinal);
-        //libros.add(libID1,ML);
-        System.out.println("Añadido el Prestamo");
+
+        añadirPrestamos(idLibro, idSocio, fechaInicio, fechaFinal);
 
 
     }
 
-    //region Listar Libros
+    public static void añadirPrestamos(int idLibro, int idSocio, Date fechaInicio, Date fechaFinal) {
+        ManagePrestamo MP = new ManagePrestamo();
 
-    private static void listaLibros() {
+        Integer libID1 = MP.addPrestamos(idLibro, idSocio, fechaInicio, fechaFinal);
+        //libros.add(libID1,ML);
+        System.out.println("Añadido el Prestamo");
+    }
+    public static Date getFecha(String fechaString)    {
+
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+        Date fecha = null;
+        try {
+
+            fecha = formatoDelTexto.parse(fechaString);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
+        //System.out.println(formatoDeFecha.format(fecha));
+
+        return fecha;
+    }
+//endregion
+
+    //region Listar Libros/Socios
+
+
+    public static void listaLibros() {
         boolean exit = false;
         do {
             System.out.println("\n<---------------------------MENU----------------------------->");
@@ -479,7 +528,7 @@ public class Program {
         } while (!exit);
     }
 
-    private static void listaTodosLibros()    {
+    public static void listaTodosLibros()    {
         ManagePrestamo MP = new ManagePrestamo();
         List prestamos = MP.listPrestamos();
         for (Iterator iterator =
@@ -495,7 +544,7 @@ public class Program {
         }
     }
 
-    private static void listaLibrosSocio()    {
+    public static void listaLibrosSocio()    {
         System.out.println("Dime el Id del Socio");
         Scanner sc = new Scanner(System.in);
         int id = sc.nextInt();
@@ -518,7 +567,7 @@ public class Program {
         }
     }
 
-    private static void listaLibrosFecha()    {
+    public static void listaLibrosFecha()    {
         System.out.println("Dime la fecha Inicio del prestamo");
         Scanner sc = new Scanner(System.in);
         String fechaFin = sc.nextLine();
@@ -542,7 +591,7 @@ public class Program {
         }
     }
 
-    private static void listaSocios()    {
+    public static void listaSocios()    {
         System.out.println("Dime la fecha final del prestamo");
         Scanner sc = new Scanner(System.in);
         String fechaString = sc.nextLine();
@@ -567,23 +616,7 @@ public class Program {
 
 //endregion
 
-    private static Date getFecha(String fechaString)    {
 
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
-        Date fecha = null;
-        try {
-
-            fecha = formatoDelTexto.parse(fechaString);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
-        //System.out.println(formatoDeFecha.format(fecha));
-
-        return fecha;
-    }
 
 
 }

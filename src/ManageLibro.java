@@ -1,9 +1,8 @@
 /**
  * Created by 45858000w on 12/12/16.
  */
-import java.util.List;
-import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -70,16 +69,19 @@ public class ManageLibro {
         List libros=null;
         try{
             tx = session.beginTransaction();
+            System.out.println("hola");
             libros = session.createQuery("FROM Libro").list();
-            for (Iterator iterator =
-                 libros.iterator(); iterator.hasNext();){
+            Libro l = (Libro) libros.get(0);
+            System.out.println(l.getTitulo());
+
+            for (Iterator iterator = libros.iterator(); iterator.hasNext();){
                 Libro libro = (Libro) iterator.next();
-                /*System.out.print("ID: " + libro.getId());
+                System.out.print("ID: " + libro.getId());
                 System.out.print("\tTitulo: " + libro.getTitulo());
                 System.out.print("\tNº Ejemplares: " + libro.getNumEjemplares());
                 System.out.print("\tEditorial: " + libro.getEditorial());
                 System.out.print("\tNº Paginas: " + libro.getNumPaginas());
-                System.out.println("\tAño Edicion: " + libro.getAnyoEdicion());*/
+                System.out.println("\tAño Edicion: " + libro.getAnyoEdicion());
             }
             tx.commit();
         }catch (HibernateException e) {

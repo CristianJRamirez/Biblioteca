@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="721.0" prefWidth="1096.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.102-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="721.0" prefWidth="1096.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.102-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <tabs>
       <Tab text="Libros">
          <content>
@@ -24,9 +23,9 @@
                <children>
                   <ToolBar prefHeight="40.0" prefWidth="200.0">
                     <items>
-                      <Button fx:id="btAddLibro" mnemonicParsing="false" text="Añadir" />
-                        <Button fx:id="btSaveLibro" mnemonicParsing="false" text="Guardar" />
-                        <Button fx:id="btFiltroLibro" mnemonicParsing="false" text="Filtrar" />
+                      <Button fx:id="btAddLibro" mnemonicParsing="false" onAction="#AddLibro" text="Añadir" />
+                        <Button fx:id="btSaveLibro" mnemonicParsing="false" onAction="#SaveLibro" text="Guardar" />
+                        <Button fx:id="btFiltroLibro" mnemonicParsing="false" onAction="#FiltroLibro" text="Filtrar" />
                     </items>
                   </ToolBar>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="1096.0">
@@ -88,10 +87,6 @@
                      </children>
                   </HBox>
                   <TableView fx:id="tblLibro" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
@@ -109,9 +104,9 @@
                <children>
                   <ToolBar prefHeight="40.0" prefWidth="200.0">
                      <items>
-                        <Button fx:id="btAddSocio" mnemonicParsing="false" text="añadir" />
-                        <Button fx:id="btSaveSocio" mnemonicParsing="false" text="Guardar" />
-                        <Button fx:id="btFiltrarSocio" mnemonicParsing="false" text="Filtrar" />
+                        <Button fx:id="btAddSocio" mnemonicParsing="false" onAction="#AddSocio" text="añadir" />
+                        <Button fx:id="btSaveSocio" mnemonicParsing="false" onAction="#SaveSocio" text="Guardar" />
+                        <Button fx:id="btFiltrarSocio" mnemonicParsing="false" onAction="#FiltrarSocio" text="Filtrar" />
                      </items>
                   </ToolBar>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="1096.0">
@@ -164,10 +159,6 @@
                      </children>
                   </HBox>
                   <TableView fx:id="tblSocio" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                     </columns>
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
@@ -185,9 +176,9 @@
                <children>
                   <ToolBar prefHeight="40.0" prefWidth="200.0">
                      <items>
-                        <Button fx:id="btAddPrestamo" mnemonicParsing="false" text="añadir" />
-                        <Button fx:id="btSaveSocio" mnemonicParsing="false" text="Guardar" />
-                        <Button fx:id="btFiltrarPRestamo" mnemonicParsing="false" text="Filtrar" />
+                        <Button fx:id="btAddPrestamo" mnemonicParsing="false" onAction="#AddPrestamo" text="añadir" />
+                        <Button fx:id="btSavePrestamo" mnemonicParsing="false" text="Guardar" />
+                        <Button fx:id="btFiltrarPRestamo" mnemonicParsing="false" onAction="#FiltrarPRestamo" text="Filtrar" />
                      </items>
                   </ToolBar>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="1096.0">
@@ -240,10 +231,6 @@
                      </children>
                   </HBox>
                   <TableView fx:id="tblPrestamo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                     </columns>
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
@@ -261,8 +248,8 @@
                <children>
                   <ToolBar prefHeight="40.0" prefWidth="200.0">
                      <items>
-                        <Button mnemonicParsing="false" text="Todos" />
-                        <Button mnemonicParsing="false" text="Filtrar" />
+                        <Button fx:id="btTodosLibrosPrestados" mnemonicParsing="false" onAction="#TodosLibrosPrestados" text="Todos" />
+                        <Button fx:id="btFiltrarLibrosPrestados" mnemonicParsing="false" onAction="#FiltrarLibrosPrestados" text="Filtrar" />
                      </items>
                   </ToolBar>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="1096.0">
@@ -297,10 +284,6 @@
                      </children>
                   </HBox>
                   <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                     </columns>
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
@@ -318,8 +301,8 @@
                <children>
                   <ToolBar prefHeight="40.0" prefWidth="200.0">
                      <items>
-                        <Button mnemonicParsing="false" text="Todos" />
-                        <Button mnemonicParsing="false" text="Filtrar" />
+                        <Button fx:id="btTodosSociosPrestamos" mnemonicParsing="false" onAction="#TodosSociosPrestamos" text="Todos" />
+                        <Button fx:id="btFiltrarSociosPrestamos" mnemonicParsing="false" onAction="#FiltrarSociosPrestamos" text="Filtrar" />
                      </items>
                   </ToolBar>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="1096.0">
@@ -336,10 +319,6 @@
                      </children>
                   </HBox>
                   <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                     </columns>
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
@@ -358,8 +337,8 @@
                   <Label text="Libro" />
                   <ToolBar prefHeight="40.0" prefWidth="200.0">
                      <items>
-                        <Button mnemonicParsing="false" text="Buscar" />
-                        <Button mnemonicParsing="false" text="Guardar" />
+                        <Button fx:id="btBuscarTituloConsultaLibro" mnemonicParsing="false" onAction="#BuscarTituloConsultaLibro" text="Buscar por Titulo" />
+                        <Button fx:id="btBuscarAnyoConsultaLibro" mnemonicParsing="false" onAction="#BuscarAnyoConsultaLibro" text="Buscar por Anyo" />
                      </items>
                   </ToolBar>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="1096.0">
@@ -367,43 +346,16 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="Titulo" />
-                              <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                              <TextArea fx:id="txtTituloConsulta" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                            </children>
                            <padding>
                               <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                            </padding>
                         </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label text="Editorial" />
-                              <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-                           </children>
-                           <padding>
-                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                           </padding>
-                        </VBox>
-                        <VBox prefHeight="66.0" prefWidth="122.0">
-                           <children>
-                              <Label text="numejemplares" />
-                              <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                           </children>
-                           <padding>
-                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                           </padding>
-                        </VBox>
-                        <VBox prefHeight="66.0" prefWidth="103.0">
-                           <children>
-                              <Label text="numPaginas" />
-                              <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-                           </children>
-                           <padding>
-                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                           </padding>
-                        </VBox>
-                        <VBox prefHeight="66.0" prefWidth="120.0">
+                        <VBox prefHeight="66.0" prefWidth="120.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="anyoEdicion" />
-                              <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                              <TextField fx:id="txtAnyoConsulta" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                            </children>
                            <padding>
                               <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
@@ -412,10 +364,6 @@
                      </children>
                   </HBox>
                   <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                     </columns>
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
@@ -423,8 +371,8 @@
                   <Label text="Socio" />
                   <ToolBar prefHeight="40.0" prefWidth="200.0">
                      <items>
-                        <Button mnemonicParsing="false" text="Buscar" />
-                        <Button mnemonicParsing="false" text="Guardar" />
+                        <Button fx:id="btBuscarNombreConsultaSocio" mnemonicParsing="false" onAction="#BuscarNombreConsultaSocio" text="Buscar por Nombre" />
+                        <Button fx:id="btBuscarEdadConsultaSocio" mnemonicParsing="false" onAction="#BuscarEdadConsultaSocio" text="Buscar por Edad" />
                      </items>
                   </ToolBar>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="1096.0">
@@ -432,7 +380,7 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="Nombre" />
-                              <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                              <TextArea fx:id="txtNombreConsulta" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                            </children>
                            <padding>
                               <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
@@ -441,25 +389,7 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="Edad" />
-                              <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-                           </children>
-                           <padding>
-                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                           </padding>
-                        </VBox>
-                        <VBox prefHeight="66.0" prefWidth="122.0">
-                           <children>
-                              <Label text="Direccion" />
-                              <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                           </children>
-                           <padding>
-                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                           </padding>
-                        </VBox>
-                        <VBox prefHeight="66.0" prefWidth="103.0">
-                           <children>
-                              <Label text="Telefono" />
-                              <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                              <TextField fx:id="txtEdadConsulta" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                            </children>
                            <padding>
                               <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
@@ -468,10 +398,6 @@
                      </children>
                   </HBox>
                   <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
-                     </columns>
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
