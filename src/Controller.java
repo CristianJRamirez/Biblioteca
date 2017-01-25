@@ -125,6 +125,8 @@ public class Controller {
     public void TodosLibrosPrestados(ActionEvent actionEvent) {
         pr.listaTodosLibros();;
     }
+
+
     //endregion
 
     //region Prestamo
@@ -177,7 +179,7 @@ public class Controller {
 
     //endregion
 
-    //region CARGAR DATOS
+    //region CARGAR DATOS -> OK
 
     public void cargarDatosLibro() {
         TableColumn id = new TableColumn<>("id");
@@ -332,6 +334,7 @@ public class Controller {
 
     //endregion
 
+    //region tablas -> OK
     public void selecionLibro(MouseEvent mouseEvent) {
         Libro libro =(Libro)tblLibro.getSelectionModel().getSelectedItem();
 
@@ -367,6 +370,7 @@ public class Controller {
 
     }
 
+    //endregion
 }
 
     /*
