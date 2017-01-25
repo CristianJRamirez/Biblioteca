@@ -22,6 +22,14 @@ public class Prestamo {
         this.fechaFinal = fechaFinal;
     }
 
+    public Prestamo(int id, int idLibro, int idSocio, Date fechaInicio, Date fechaFinal) {
+        this.id=id;
+        this.idLibro = idLibro;
+        this.idSocio = idSocio;
+        this.fechaInicio = fechaInicio;
+        this.fechaFinal = fechaFinal;
+    }
+
     public int getId() {
         return id;
     }

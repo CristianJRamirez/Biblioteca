@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -50,6 +51,9 @@ public class Controller {
     public TextArea txtTituloConsulta;
     //endregion
 
+    private ObservableList datosLibros;
+    private ObservableList datosSocios;
+    private ObservableList datosPrestamos;
     private Program pr;
 
     //region Controladores
@@ -64,11 +68,22 @@ public class Controller {
 
     }
 
-    public void cargarDatos()
-    {
+    public void cargarDatos()    {
         cargarDatosLibro();
         cargarDatosSocio();
         cargarDatosPrestamos();
+
+/*
+        for (int i = 0; i < datosLibros.size(); i++) {
+            System.out.println(((Libro)datosLibros.get(i)).getTitulo());
+        }
+        for (int i = 0; i < datosSocios.size(); i++) {
+            System.out.println(((Socio)datosSocios.get(i)).getNombre());
+        }
+        for (int i = 0; i < datosPrestamos.size(); i++) {
+            System.out.println(((Prestamo)datosPrestamos.get(i)).getId());
+        }
+        */
     }
 
 
@@ -78,7 +93,7 @@ public class Controller {
     }
 
     public void BuscarAnyoConsultaLibro(ActionEvent actionEvent) {
-        pr.buscarLibroAnyo(Integer.parseInt(0+txtAnyoConsulta.getText()));
+        pr.buscarLibroAnyo(Integer.parseInt(String.valueOf(txtAnyoConsulta.getText())));
     }
 
     public void BuscarNombreConsultaSocio(ActionEvent actionEvent) {
@@ -86,7 +101,7 @@ public class Controller {
     }
 
     public void BuscarEdadConsultaSocio(ActionEvent actionEvent) {
-        pr.buscarSocioEdat(Integer.parseInt(0+txtEdadConsulta.getText()));
+        pr.buscarSocioEdat(Integer.parseInt(txtEdadConsulta.getText()));
 
     }
 
@@ -114,10 +129,9 @@ public class Controller {
 
     //region Prestamo
     public void AddPrestamo(ActionEvent actionEvent) {
-        pr.añadirPrestamos(Integer.parseInt(0+txtIdLibroPrestamo.getText()),Integer.parseInt(0+txtIdSocioPrestamo.getText()),pr.getFecha(txtFechaInicioPrestamo.getText()),pr.getFecha(txtFechaFinalPrestamo.getText()));
+        pr.añadirPrestamos(Integer.parseInt(String.valueOf(txtIdLibroPrestamo.getText())),Integer.parseInt(txtIdSocioPrestamo.getText()),pr.getFecha(txtFechaInicioPrestamo.getText()),pr.getFecha(txtFechaFinalPrestamo.getText()));
         cargarDatos();
     }
-
 
 
     public void FiltrarPRestamo(ActionEvent actionEvent) {
@@ -128,13 +142,13 @@ public class Controller {
 
     //region SOCIO
     public void AddSocio(ActionEvent actionEvent) {
-        pr.añadirSocio(1, Integer.parseInt(0+txtIdSocio.getText()),txtNombreSocio.getText() , Integer.parseInt(0+txtEdadSocio.getText()) ,txtDireccionSocio.getText()  ,Integer.parseInt(0+txtTelefonoSocio.getText()));
+        pr.añadirSocio(1, Integer.parseInt(txtIdSocio.getText()),txtNombreSocio.getText() , Integer.parseInt(txtEdadSocio.getText()) ,txtDireccionSocio.getText()  ,Integer.parseInt(txtTelefonoSocio.getText()));
         cargarDatos();
 
     }
 
     public void SaveSocio(ActionEvent actionEvent) {
-        pr.añadirSocio(2, Integer.parseInt(0+txtIdSocio.getText()),txtNombreSocio.getText() , Integer.parseInt(0+txtEdadSocio.getText()) ,txtDireccionSocio.getText()  ,Integer.parseInt(0+txtTelefonoSocio.getText()));
+        pr.añadirSocio(2, Integer.parseInt(txtIdSocio.getText()),txtNombreSocio.getText() , Integer.parseInt(txtEdadSocio.getText()) ,txtDireccionSocio.getText()  ,Integer.parseInt(txtTelefonoSocio.getText()));
         cargarDatos();
 
     }
@@ -146,13 +160,13 @@ public class Controller {
     //region Libro
     public void AddLibro(ActionEvent actionEvent) {
         
-        pr.añadirLIbro(1, Integer.parseInt(0+txtIdLibro.getText()),txtTituloLibro.getText(), Integer.parseInt(0+txtEjemplaresLibro.getText()),txtEditorialLibro.getText(), Integer.parseInt(0+txtPaginasLibro.getText()), Integer.parseInt(0+txtAnyoLibro.getText()));
+        pr.añadirLIbro(1, Integer.parseInt(txtIdLibro.getText()),txtTituloLibro.getText(), Integer.parseInt(txtEjemplaresLibro.getText()),txtEditorialLibro.getText(), Integer.parseInt(txtPaginasLibro.getText()), Integer.parseInt(txtAnyoLibro.getText()));
         cargarDatos();
         //añadirLIbro(int opcion, int id, String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion)
     }
 
     public void SaveLibro(ActionEvent actionEvent) {
-        pr.añadirLIbro(2,Integer.parseInt(0+txtIdLibro.getText()),txtTituloLibro.getText(), Integer.parseInt(0+txtEjemplaresLibro.getText()),txtEditorialLibro.getText(), Integer.parseInt(0+txtPaginasLibro.getText()), Integer.parseInt(0+txtAnyoLibro.getText()));
+        pr.añadirLIbro(2,Integer.parseInt(txtIdLibro.getText()),txtTituloLibro.getText(), Integer.parseInt(txtEjemplaresLibro.getText()),txtEditorialLibro.getText(), Integer.parseInt(txtPaginasLibro.getText()), Integer.parseInt(txtAnyoLibro.getText()));
         cargarDatos();
     }
 
@@ -166,6 +180,9 @@ public class Controller {
     //region CARGAR DATOS
 
     public void cargarDatosLibro() {
+        TableColumn id = new TableColumn<>("id");
+        id.setCellValueFactory(new PropertyValueFactory("id"));
+
         TableColumn titulo = new TableColumn<>("titulo");
         titulo.setCellValueFactory(new PropertyValueFactory("titulo"));
 
@@ -177,10 +194,10 @@ public class Controller {
 
         TableColumn anyoEdicion = new TableColumn<>("anyoEdicion");
         anyoEdicion.setCellValueFactory(new PropertyValueFactory("anyoEdicion"));
+        tblLibro.getColumns().clear();
+        tblLibro.getColumns().addAll(id,titulo, numEjemplares, numPaginas,anyoEdicion);
 
-        tblLibro.getColumns().addAll(titulo, numEjemplares, numPaginas,anyoEdicion);
-
-        final ObservableList datos = FXCollections.observableArrayList();
+        datosLibros = FXCollections.observableArrayList();
 
         ManageLibro ML = new ManageLibro();
 
@@ -188,11 +205,11 @@ public class Controller {
 
         for (Libro libro: libros)
         {
-            datos.add(new Libro(libro.getTitulo() , libro.getNumEjemplares() , libro.getEditorial() , libro.getNumPaginas() ,libro.getAnyoEdicion() ));
-
+            datosLibros.add(new Libro(libro.getId(),libro.getTitulo() , libro.getNumEjemplares() , libro.getEditorial() , libro.getNumPaginas() ,libro.getAnyoEdicion() ));
+            //System.out.println(libro.getId()+"-"+ libro.getTitulo() +"-"+ libro.getNumEjemplares() +"-"+ libro.getEditorial() +"-"+ libro.getNumPaginas() +"-"+libro.getAnyoEdicion());
         }
 
-        tblLibro.setItems(datos);
+        tblLibro.setItems(datosLibros);
 
         tblLibro.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
@@ -213,6 +230,8 @@ public class Controller {
     }
 
     private void cargarDatosSocio() {
+        TableColumn id = new TableColumn<>("id");
+        id.setCellValueFactory(new PropertyValueFactory("id"));
 
         TableColumn nombre = new TableColumn<>("nombre");
         nombre.setCellValueFactory(new PropertyValueFactory("nombre"));
@@ -226,19 +245,22 @@ public class Controller {
         TableColumn telefono = new TableColumn<>("telefono");
         telefono.setCellValueFactory(new PropertyValueFactory("telefono"));
 
-        tblSocio.getColumns().addAll(nombre,edad, direccion,telefono);
+        tblSocio.getColumns().clear();
+        tblSocio.getColumns().addAll(id,nombre,edad, direccion,telefono);
 
-        final ObservableList datos = FXCollections.observableArrayList();
+
+        datosSocios = FXCollections.observableArrayList();
 
 
         List<Socio> socios =getSocios();
 
         for (Socio socio: socios)
         {
-            datos.add(new Socio(socio.getNombre(),socio.getEdad(),socio.getDireccion(),socio.getTelefono()));
+            datosSocios.add(new Socio(socio.getId(),socio.getNombre(),socio.getEdad(),socio.getDireccion(),socio.getTelefono()));
+            //System.out.println(socio.getId()+"-"+ socio.getNombre()+"-"+ socio.getEdad()+"-"+ socio.getDireccion()+"-"+ socio.getTelefono());
         }
 
-        tblSocio.setItems(datos);
+        tblSocio.setItems(datosSocios);
 
         tblSocio.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
@@ -258,6 +280,8 @@ public class Controller {
     }
 
     private void cargarDatosPrestamos() {
+        TableColumn id = new TableColumn<>("id");
+        id.setCellValueFactory(new PropertyValueFactory("id"));
 
         TableColumn idSocio = new TableColumn<>("idSocio");
         idSocio.setCellValueFactory(new PropertyValueFactory("idSocio"));
@@ -270,10 +294,10 @@ public class Controller {
 
         TableColumn fechaFinal = new TableColumn<>("fechaFinal");
             fechaFinal.setCellValueFactory(new PropertyValueFactory("fechaFinal"));
+        tblPrestamo.getColumns().clear();
+        tblPrestamo.getColumns().addAll(id,idLibro,idSocio, fechaInicio,fechaFinal);
 
-        tblPrestamo.getColumns().addAll(idLibro,idSocio, fechaInicio,fechaFinal);
-
-        final ObservableList datos = FXCollections.observableArrayList();
+        datosPrestamos = FXCollections.observableArrayList();
 
 
 
@@ -281,11 +305,12 @@ public class Controller {
 
         for (Prestamo prestamo: prestamos)
         {
-            datos.add(new Prestamo(prestamo.getIdLibro(),prestamo.getIdSocio(),prestamo.getFechaInicio(),prestamo.getFechaFinal()));
+            datosPrestamos.add(new Prestamo(prestamo.getId(),prestamo.getIdLibro(),prestamo.getIdSocio(),prestamo.getFechaInicio(),prestamo.getFechaFinal()));
+            //System.out.println(prestamo.getId()+"-"+ prestamo.getIdLibro()+"-"+ prestamo.getIdSocio()+"-"+ prestamo.getFechaInicio()+"-"+ prestamo.getFechaFinal());
 
         }
 
-        tblPrestamo.setItems(datos);
+        tblPrestamo.setItems(datosPrestamos);
 
         tblPrestamo.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
@@ -307,4 +332,48 @@ public class Controller {
 
     //endregion
 
+    public void selecionLibro(MouseEvent mouseEvent) {
+        Libro libro =(Libro)tblLibro.getSelectionModel().getSelectedItem();
+
+        txtIdLibro.setText(String.valueOf(libro.getId()));
+        txtTituloLibro.setText(libro.getTitulo());
+        txtEditorialLibro.setText(libro.getEditorial());
+        txtEjemplaresLibro.setText(String.valueOf(libro.getNumEjemplares()));
+        txtPaginasLibro.setText(String.valueOf(libro.getNumPaginas()));
+        txtAnyoLibro.setText(String.valueOf(libro.getAnyoEdicion()));
+
+    }
+
+    public void selecionSocio(MouseEvent mouseEvent) {
+        Socio socio =(Socio)tblSocio.getSelectionModel().getSelectedItem();
+
+        txtIdSocio.setText(String.valueOf(socio.getId()));
+        txtNombreSocio.setText(socio.getNombre());
+        txtEdadSocio.setText(String.valueOf(socio.getEdad()));
+        txtDireccionSocio.setText(socio.getDireccion());
+        txtTelefonoSocio.setText(String.valueOf(socio.getTelefono()));
+
+
+    }
+
+    public void selecionPrestamo(MouseEvent mouseEvent) {
+        Prestamo prestamo =(Prestamo)tblPrestamo.getSelectionModel().getSelectedItem();
+
+        txtIdPrestamo.setText(String.valueOf(prestamo.getId()));
+        txtIdLibroPrestamo.setText(String.valueOf(prestamo.getIdLibro()));
+        txtIdSocioPrestamo.setText(String.valueOf(prestamo.getIdSocio()));
+        txtFechaInicioPrestamo.setText(String.valueOf(prestamo.getFechaInicio()));
+        txtFechaFinalPrestamo.setText(String.valueOf(prestamo.getFechaFinal()));
+
+    }
+
 }
+
+    /*
+    TODO:
+        boton de filtrar, :libro, socio, prestamos
+        mostrar libros prestados y filtrar
+        mostrar socios prestamos y filtrar
+        consultas motrar resultados
+
+    */

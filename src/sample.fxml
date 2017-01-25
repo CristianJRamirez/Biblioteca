@@ -86,7 +86,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <TableView fx:id="tblLibro" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="tblLibro" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#selecionLibro" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
@@ -158,7 +158,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <TableView fx:id="tblSocio" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="tblSocio" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#selecionSocio" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>
@@ -177,7 +177,6 @@
                   <ToolBar prefHeight="40.0" prefWidth="200.0">
                      <items>
                         <Button fx:id="btAddPrestamo" mnemonicParsing="false" onAction="#AddPrestamo" text="añadir" />
-                        <Button fx:id="btSavePrestamo" mnemonicParsing="false" text="Guardar" />
                         <Button fx:id="btFiltrarPRestamo" mnemonicParsing="false" onAction="#FiltrarPRestamo" text="Filtrar" />
                      </items>
                   </ToolBar>
@@ -230,7 +229,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <TableView fx:id="tblPrestamo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="tblPrestamo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#selecionPrestamo" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                      </padding>

@@ -19,6 +19,15 @@ public class Socio {
         this.telefono = telefono;
     }
 
+    public Socio(int id, String nombre, int edad, String direccion, int telefono) {
+        this.id=id;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.direccion = direccion;
+        this.telefono = telefono;
+
+    }
+
     public int getId() {
         return id;
     }

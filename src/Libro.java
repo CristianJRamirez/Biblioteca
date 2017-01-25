@@ -14,11 +14,20 @@ public class Libro {
     }
 
     public Libro(String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion) {
-        this.titulo = titulo;
-        this.numEjemplares = numEjemplares;
-        Editorial = editorial;
-        this.numPaginas = numPaginas;
-        this.anyoEdicion = anyoEdicion;
+        this.titulo=titulo;
+        this.numEjemplares=numEjemplares;
+        this.anyoEdicion=anyoEdicion;
+        this.Editorial=editorial;
+        this.numPaginas=numPaginas;
+    }
+
+    public Libro(int id, String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion) {
+        this.id=id;
+        this.titulo=titulo;
+        this.numEjemplares=numEjemplares;
+        this.anyoEdicion=anyoEdicion;
+        this.Editorial=editorial;
+        this.numPaginas=numPaginas;
     }
 
     public int getId() {
