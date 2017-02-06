@@ -69,5 +69,16 @@ public class Prestamo {
     public void setFechaFinal(Date fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
+
+    @Override
+    public String toString() {
+        return "Prestamo{" +
+                "id=" + id +
+                ", idLibro=" + idLibro +
+                ", idSocio=" + idSocio +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFinal=" + fechaFinal +
+                '}';
+    }
 }
 

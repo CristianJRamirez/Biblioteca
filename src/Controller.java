@@ -49,11 +49,14 @@ public class Controller {
     public TextField txtEdadConsulta;
     public TextField txtAnyoConsulta;
     public TextArea txtTituloConsulta;
+    public TextField fechafinPrestado;
+    public TableView tblLibrosPrestados;
     //endregion
 
     private ObservableList datosLibros;
     private ObservableList datosSocios;
     private ObservableList datosPrestamos;
+    private ObservableList datosPrestados;
     private Program pr;
 
     //region Controladores
@@ -118,8 +121,93 @@ public class Controller {
 
     //region Libros Prestados
     public void FiltrarLibrosPrestados(ActionEvent actionEvent) {
-        pr.listaLibrosSocio();
-        pr.listaLibrosFecha();
+        //pr.listaLibrosSocio();
+        //pr.listaLibrosFecha();
+
+        List<Libro> libros =getLibros();
+        List<Socio> socios =getSocios();
+        List<Prestamo> prestamos = buscarPrestados();
+
+
+        TableColumn tituloLibro = new TableColumn<>("tituloLibro");
+        tituloLibro.setCellValueFactory(new PropertyValueFactory("tituloLibro"));
+
+        TableColumn numEjemplares = new TableColumn<>("numEjemplares");
+        numEjemplares.setCellValueFactory(new PropertyValueFactory("numEjemplares"));
+
+        TableColumn nombreSocio = new TableColumn<>("nombreSocio");
+        nombreSocio.setCellValueFactory(new PropertyValueFactory("nombreSocio"));
+
+        TableColumn edad = new TableColumn<>("edad");
+        edad.setCellValueFactory(new PropertyValueFactory("edad"));
+
+
+        tblLibrosPrestados.getColumns().clear();
+        tblLibrosPrestados.getColumns().addAll(nombreSocio,tituloLibro, numEjemplares, edad);
+
+        datosPrestados = FXCollections.observableArrayList();
+
+        ArrayList<Prestado> prestados= new ArrayList<>();
+        for (Prestamo prestamo: prestamos)
+        {
+            //System.out.println("P"+prestamo.toString());
+            Prestado prest = new Prestado();
+            for (Libro lib:libros) {
+                if (prestamo.getIdLibro()==lib.getId())
+                {
+                    prest.setTituloLibro(lib.getTitulo());
+                    prest.setNumEjemplares(lib.getNumEjemplares());
+                }
+            }
+            for (Socio soc:socios) {
+                if (prestamo.getIdSocio()==soc.getId())
+                {
+                    prest.setNombreSocio(soc.getNombre());
+                    prest.setEdad(soc.getEdad());
+                }
+            }
+            prestados.add(new Prestado(prest.getNombreSocio(),prest.getTituloLibro(),prest.getNumEjemplares(),prest.getEdad()));
+        }
+
+
+        for (Prestado pres: prestados)
+        {
+
+            System.out.println("PRESTADO -->"+pres.toString());
+            datosPrestados.add(new Prestado(pres.getNombreSocio(),pres.getTituloLibro(),pres.getNumEjemplares(),pres.getEdad()));   //(libro.getTitulo() , libro.getNumEjemplares() );
+            //System.out.println(libro.getId()+"-"+ libro.getTitulo() +"-"+ libro.getNumEjemplares() +"-"+ libro.getEditorial() +"-"+ libro.getNumPaginas() +"-"+libro.getAnyoEdicion());
+        }
+
+        tblLibrosPrestados.setItems(datosPrestados);
+
+        tblLibrosPrestados.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+    }
+    public ArrayList<Prestamo> buscarPrestados()
+    {
+
+        if (!fechafinPrestado.getText().isEmpty()) {
+            Date fecha = pr.getFecha(fechafinPrestado.getText());
+            ManagePrestamo MP = new ManagePrestamo();
+            ArrayList<Prestamo> prestamos = new ArrayList<>();
+            for (Iterator iterator =MP.listPrestamos().iterator(); iterator.hasNext(); )
+            {
+                Prestamo prestamo = (Prestamo) iterator.next();
+
+                if (prestamo.getFechaFinal().before(fecha)) {
+                    /*System.out.print("ID : " + prestamo.getId());
+                    System.out.print("\tID Libro: " + prestamo.getIdLibro());
+                    System.out.print("\tID Socio: " + prestamo.getIdSocio());
+                    System.out.println("\tFecha Inicio: " + prestamo.getFechaInicio());
+                    System.out.println("\tFecha Final: " + prestamo.getFechaFinal());*/
+                    prestamos.add(prestamo);
+                }
+
+            }
+            return prestamos;
+        }
+
+        return null;
     }
 
     public void TodosLibrosPrestados(ActionEvent actionEvent) {
@@ -144,7 +232,7 @@ public class Controller {
 
     //region SOCIO
     public void AddSocio(ActionEvent actionEvent) {
-        pr.añadirSocio(1, Integer.parseInt(txtIdSocio.getText()),txtNombreSocio.getText() , Integer.parseInt(txtEdadSocio.getText()) ,txtDireccionSocio.getText()  ,Integer.parseInt(txtTelefonoSocio.getText()));
+        pr.añadirSocio(1, 0,txtNombreSocio.getText() , Integer.parseInt(txtEdadSocio.getText()) ,txtDireccionSocio.getText()  ,Integer.parseInt(txtTelefonoSocio.getText()));
         cargarDatos();
 
     }
@@ -162,7 +250,7 @@ public class Controller {
     //region Libro
     public void AddLibro(ActionEvent actionEvent) {
         
-        pr.añadirLIbro(1, Integer.parseInt(txtIdLibro.getText()),txtTituloLibro.getText(), Integer.parseInt(txtEjemplaresLibro.getText()),txtEditorialLibro.getText(), Integer.parseInt(txtPaginasLibro.getText()), Integer.parseInt(txtAnyoLibro.getText()));
+        pr.añadirLIbro(1, 0,txtTituloLibro.getText(), Integer.parseInt(txtEjemplaresLibro.getText()),txtEditorialLibro.getText(), Integer.parseInt(txtPaginasLibro.getText()), Integer.parseInt(txtAnyoLibro.getText()));
         cargarDatos();
         //añadirLIbro(int opcion, int id, String titulo, int numEjemplares, String editorial, int numPaginas, int anyoEdicion)
     }
